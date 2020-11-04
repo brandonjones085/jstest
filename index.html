@@ -3,20 +3,21 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script> 
- 
+  //current date
   let d = new Date().getDate()
   
-var currentDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
-var day = currentDate.getDate()
-var month = currentDate.getMonth() + 1
-var year = currentDate.getFullYear()
+  //for tomorrows date
+  var currentDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+  var day = currentDate.getDate()
+  var month = currentDate.getMonth() + 1
+  var year = currentDate.getFullYear()
  
   let m = new Date().getMonth() + 1
  
   let y = new Date().getFullYear()
  
+  //current date
   d = d.toString()
-//   d2 = d2.toString()
   y = y.toString()
   m = m.toString()
  
@@ -26,6 +27,7 @@ var year = currentDate.getFullYear()
   //tomorrows date
   let endDate = `${year}-${month}-${day}`
  
+ //main url
 const url = `https://www.googleapis.com/calendar/v3/calendars/vgn57os9bsbdbknhtadnmgqh3louv24d@import.calendar.google.com/events?key=AIzaSyACxYM0MpM9y4p9ViJT3jQoe9VE-P3INKU&timeMin=${startDate}T5:00:00Z&timeMax=${endDate}T5:00:00Z&singleEvents=True&orderBy=startTime`
 $(document).ready(function(){
   $("button").click(function(){
@@ -33,6 +35,7 @@ $(document).ready(function(){
       console.log(result.items)
       $.each(result.items, function(i, field){
  
+        //formatting
         let t = field.start.dateTime; 
         t = t.toString()
         let r = t.indexOf("T")
@@ -40,7 +43,7 @@ $(document).ready(function(){
         
         let hour = t.slice(r+1, 13)
         let min = t.slice(r+3, 16)
-         let time = t.slice(r+1, 16)
+        let time = t.slice(r+1, 16)
  
         // //converts miliary to standard, adds am/pm
         if(hour > 12){
@@ -50,6 +53,7 @@ $(document).ready(function(){
           final = time + " am"
         }
  
+        //logs output
         console.log( "Name: " +field.summary)
         console.log("Location "+ field.location)
         console.log("Time "+ final)
